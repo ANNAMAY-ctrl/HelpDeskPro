@@ -1,0 +1,130 @@
+﻿* {
+
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1e293b;
+}
+
+.navbar {
+    background-color: #ffffff;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+    .navbar h2 {
+        margin: 0;
+        color: #6366f1;
+    }
+
+    .navbar span {
+        color: #64748b;
+    }
+
+.container {
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.welcome h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    color: #64748b;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 35px 0;
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+    .stat-card h3 {
+        font-size: 15px;
+        color: #64748b;
+    }
+
+    .stat-card p {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 0;
+        color: #6366f1;
+    }   
+
+    .tickets{
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+    }
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+button {
+    background-color: #6366f1;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+    button:hover {
+        background: #4f46e5;
+    }
+
+
+#emptyMessage {
+    text-align: center;
+    padding: 45px 10px;
+    color: #94a3b8;
+}
+
+@media (max-width: 80px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        padding: 20px;
+    }
+
+        .navbar span {
+            display: none;
+        }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
