@@ -128,3 +128,22 @@ button {
         align-items: flex-start;
     }
 }
+.ticket-form textarea {
+    resize: vertical;
+    
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cancel-btn {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+    .cancel-btn:hover {
+        background: #cbd5e1;
+    }   

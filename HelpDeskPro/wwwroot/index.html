@@ -68,6 +68,64 @@
     
         </section>
 
+        <section id="ticketFormSection"
+                 class="tickets-form" hidden>
+
+            <h2> Create New Support Ticket </h2>
+
+            <form id="ticketForm">
+                <label for="fullName">Full Name</label>
+                <input type="text"
+                       id="fullName"
+                       placeholder="Enter your full name"
+                       required>
+
+
+                <label for="issueTitle">Issue Title</label>
+                <input type="text"
+                       id="issueTitle"
+                       placeholder="e.g. Wi-Fi not working"
+                       required>
+
+                <label for="Category">Category</label>
+                <select id="Category" required>
+                    <option value="">Select a category</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Network">Network</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="priority">Priority</label>
+                <select id="priority" required>
+                    <option value="">Select a priority</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+
+                <label for="description">Description</label>
+                <textarea id="description"
+                             rows="5"
+                          placeholder="Describe your problem..."
+                          required></textarea>
+
+                <div class="form-actions">
+
+
+                    <button type="submit">
+                        Submit Ticket
+                    </button>
+
+                    <button type="button"
+                            id="cancelTicketBtn"
+                            class="cancel-btn">
+                        Cancel
+                     </button>
+                </div>
+            </form>
+        </section>
+
     </main>
 
 </body>
