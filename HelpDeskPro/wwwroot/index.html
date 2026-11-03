@@ -32,24 +32,24 @@
 
             <div class="stat-card">
                 <h3>Total Tickets</h3>
-                <p>0</p>
+                <p id="totalTickets">0</p>
             </div>
 
             <div class="stat-card">
                 <h3>Open Tickets</h3>
-                <p>0</p>
+                <p id="openTickets">0</p>
             </div>
 
             <div class="stat-card">
                 <h3>In Progress</h3>
-                <p>0</p>
+                <p id="inProgressTickets">0</p>
             </div>
 
             <div class="stat-card">
                 <h3>Resolved</h3>
-                <p>0</p>
+                <p id="resolvedTickets">0</p>
             </div>
-
+    
         </section>
 
         <section class="tickets">
@@ -65,6 +65,8 @@
                 No support tickets yet.
                 Create your first ticket to get started!
             </p>
+
+            <div id="ticketList"></div>
     
         </section>
 
@@ -73,7 +75,7 @@
 
             <h2> Create New Support Ticket </h2>
 
-            <form id="ticketForm">
+            <form id="ticketForm" >
                 <label for="fullName">Full Name</label>
                 <input type="text"
                        id="fullName"
@@ -87,8 +89,8 @@
                        placeholder="e.g. Wi-Fi not working"
                        required>
 
-                <label for="Category">Category</label>
-                <select id="Category" required>
+                <label for="category">Category</label>
+                <select id="category" required>
                     <option value="">Select a category</option>
                     <option value="Hardware">Hardware</option>
                     <option value="Software">Software</option>

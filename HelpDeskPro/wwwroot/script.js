@@ -24,6 +24,7 @@ cancelTicketBtn.addEventListener("click", function () {
 
 ticketForm.addEventListener("submit", function (event) {
     event.preventDefault();
+    
 
     const fullName =
         document.getElementById("fullName").value.trim();
@@ -32,16 +33,17 @@ ticketForm.addEventListener("submit", function (event) {
         document.getElementById("issueTitle").value.trim();
 
     const category =
-        document.getElementById("category").value.trim();
+        document.getElementById("category").value;
 
     const priority =
-        document.getElementById("priority").value.trim();
+        document.getElementById("priority").value;
 
     const description =
         document.getElementById("description").value.trim();
 
-    if (!fullName || !issueTitle || !description) {
-        alert("Please fill in all required fields.");
+    if (!fullName || !issueTitle ||
+        !category || !priority || !description) {
+        alert("Please complete all required fields.");
         return;
     }
 
@@ -51,7 +53,9 @@ ticketForm.addEventListener("submit", function (event) {
         category: category,
         priority: priority,
         description: description,
-        status: "Open"
+        status: "Open",
+
+        createdAt: new Date().toISOString() 
     };
 
     console.log("New Ticket:", newTicket);
