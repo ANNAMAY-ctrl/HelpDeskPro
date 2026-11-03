@@ -6,61 +6,108 @@ const ticketFormSection =
     document.getElementById("ticketFormSection");
 const cancelTicketBtn = 
     document.getElementById("cancelTicketBtn");
+const ticketList =
+    document.getElementById("ticketList");
+const emptyMessage =
+    document.getElementById("emptyMessage");
 
-createTicketBtn.addEventListener("click", function () {
+    //LOAD SAVED TICKETS
+const savedTickets =
+    localStorage.getItem("helpdeskTickets");
 
-    ticketFormSection.hidden = false;
-    ticketFormSection.scrollIntoView({
-        behavior: "smooth"
-    });
+// If nothing has been saved, start with an empty array.
+let tickets = savedTickets
+    ? JSON.parse(savedTickets)
+    : [];
 
-});
+//SAVE TICKETS
+function saveTickets() {
 
-cancelTicketBtn.addEventListener("click", function () {
-    ticketFormSection.hidden = true;
-    ticketForm.reset();
-});
+    const ticketData = JSON.stringify(tickets);
+    localStorage.getItem("helpdeskTickets", ticketData);
+}
 
+//UPDATE DASHBOARD STATS
+function updateStatistics() {
 
-ticketForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    
+    //Count all the tickets in our array
+    const total = tickets.length;
+    //Count tickets with the status "Open".
+    const open = tickets.filter(function (ticket){
+        return ticket.status === "Open";
+    }).length;
 
-    const fullName =
-        document.getElementById("fullName").value.trim();
+    //Count tickets currently in progress
+    const inProgress = tickets.filter(function (ticket) {
+        return ticket.status === "In Progress"
+    }).length
 
-    const issueTitle =
-        document.getElementById("issueTitle").value.trim();
+    // Count tickets marked as resolved.
+    const resolved = tickets.filter(function (ticket) {
+        return ticket.status === "Resolved";
+    }).length;
 
-    const category =
-        document.getElementById("category").value;
+    //Update the number displayed in HTML
+    document.getElementById("totalTickets").textContent =
+        total;
+    document.getElementById("openTickets").textContent =
+        open;
+    document.getElementById("progressTickets").textContent =
+        inProgress;
+    document.getElementById("resolvedTickets").textContent =
+        resolved;
+}
 
-    const priority =
-        document.getElementById("priority").value;
+//DISPLAY SUPPORT TICKETS
+function displayTickets() {
 
-    const description =
-        document.getElementById("description").value.trim();
+    //remove previously displayed ticket cards
+    ticketList.innerHTML = "";
 
-    if (!fullName || !issueTitle ||
-        !category || !priority || !description) {
-        alert("Please complete all required fields.");
+    //check whether the tcket array is empty
+    if (ticket.length === 0) {
+        emptyMessage.hidden = false;
+        updateStatistics();
         return;
     }
+    //hide emty message when tickets exist
+    emptyMessage.hidden = true;
 
-    const newTicket = {
-        name: fullName,
-        title: issueTitle,
-        category: category,
-        priority: priority,
-        description: description,
-        status: "Open",
+    //loop through every ticket in the array
+    tickets.forEach(function (ticket) {
+        const card = document.createElement("div")
 
-        createdAt: new Date().toISOString() 
-    };
+        //apply CSS ticket-card styling
+        card.className = "ticket-card";
 
-    console.log("New Ticket:", newTicket);
-    alert("Ticket submitted successfully!");
-    ticketForm.reset();
-    ticketFormSection.hidden = true;
-});
-console.log("HelpDesk Pro loaded successfully!");
+        const title = document.createElement("h3");
+        title.textContent = ticket.title;
+
+        //create a paragraph for the ticket ID
+        const ticketId = document.createElement("p");
+        ticketId.className = "ticket-id";
+        ticketId.textContent = "Ticket ID: " + ticket.id;
+
+        // create a paragraph for the requester's name
+        const name = document.createElement("p");
+        name.textContent = "Submitted by: " + ticket.name;
+
+
+        //create a paragraph for category
+        const category = document.createElement("p");
+        name.textContent = "Category: " + ticket.category;
+
+        //create a paragraph for description
+        const description = document.createElement("p");
+        description.textContent = 
+            "Description: " + ticket.description
+
+        //Create a label showing ticket priority
+        const priority = document.createElement("span");
+
+        priority.className =
+            "priority-badge priority-" +
+            ticket.priority.toLowerCase();
+
+        priority.textContent = ticket.priority + "Priority";
+}
