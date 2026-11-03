@@ -99,7 +99,7 @@ function displayTickets() {
 
         //create a paragraph for description
         const description = document.createElement("p");
-        description.textContent = 
+        description.textContent =
             "Description: " + ticket.description
 
         //Create a label showing ticket priority
@@ -110,4 +110,151 @@ function displayTickets() {
             ticket.priority.toLowerCase();
 
         priority.textContent = ticket.priority + "Priority";
+
+        // Create a container for status controls.
+        const statusContainer = document.createElement("div");
+        statusContainer.className = "status-control";
+
+        //Create an accesible label
+        const statusLabel = document.createElement("label");
+        statusLabel.textContent = "Status: ";
+
+        //Create a dropdown for updating ticket status
+        const statusSelect = document.createElement("select");
+        statusSelect.className = "ticket-status";
+
+        //Give the dropdown a unique ID
+        statusSelect.id = "status-" + ticket.id;
+
+        //Connect the label to the dropdown 
+        statuslabel.htmlFor = statusSelect.id;
+
+        //Define the allowed ticket statuses
+        const statuses = [
+            "Open",
+            "In Progress",
+            "Resolved"
+        ];
+
+        //Add each status as a dropdown option
+        statuses.forEach(function (status) {
+            const option = document.createElement("option");
+            option.value = status;
+            option.textContent = status;
+            statusSelect.appendChild(option);
+        });
+
+        //Select the tickets current status
+        statusSelect.value = ticket.status;
+
+        //Listen for changes to status dropdown
+        statusSelect.addEventListener("change", function () {
+
+            //Update the ticket's status in the array
+            ticket.status = statusSelect.value;
+
+            //Save the updated tickets to local storage
+            saveTickets();
+
+            //Refresh the dashboard statistics
+            updateStatistics();
+        });
+
+        //Put the label and dropdown together
+        statusContainer.appendChild(statusLabel);
+        statusContainer.appendChild(statusSelect);
+
+        //Add all ticket information to the card
+        card.appendChild(ticketId);
+        card.appendChild(name);
+        card.appendChild(category);
+        card.appendChild(description);
+        card.appendChild(priority);
+        card.appendChild(statusContainer);
+        card.appendChild(title);
+
+        //Add the completed card to our dashboard
+        ticketList.appendChild(card);
+    });
+    updateStatistics();
 }
+
+
+//OPEN CREATE TICKET FORM
+createTicketBtn.addEventListener("click", function () {
+
+    ticketFormSection.hidden = false;
+    ticketFormSection.scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
+
+//CANCEL TICKET CREATION
+cancelTicketBtn.addEventListener("click", function () {
+    ticketFormSection.hidden = true;
+    ticketForm.reset();
+});
+
+//SUBMIT A NEW SUPPORT TICKET
+ticketform.addEventListener("submit", function (event) {
+
+    //Prevent the browser from refreshing
+    event.preventDefault();
+
+    //Get information entered by user
+    const fullName =
+        document.getElementById("fullName").value.trim();
+
+    const issueTitle =
+        document.getElementById("issueTitle").value.trim();
+
+    const category =
+        document.getElementById("category").value;
+
+    const priority =
+        document.getElementById("priority").value;
+
+    const description =
+        document.getElementById("description").value.trim();
+
+    //Check that all required information is present
+    if (!fullName || !issueTitle || !category || !priority || !description) {
+        alert("Please complete all required fields.");
+        return;
+    }
+
+    //Create a unique ticket ID
+    const ticketId = crypto.randomUUID();
+
+
+    //Create a JavaScript object containing the ticket
+    const netTicket = {
+        id: ticketId,
+        name: fullName,
+        title: issueTitle,
+        category: category,
+        priority: priority,
+        description: description,
+        status: "Open",
+        createdAt: new Date().toISOString()
+    };
+
+    //Add the new ticket to the beginning of the array
+    tickets.unshift(newTicket);
+
+    //Save all tickets to browser storage
+    saveTickets();
+
+    //Display the new ticket on the dashboard
+    displayTickets();
+
+    alert("Support ticket created successfully!");
+    ticketForm.reset();
+    ticketFormSection.hidden = true;
+});
+
+
+//APPLICATION STARTUP
+displayTickets();
+console.log("Help Desk Pro is running!");
