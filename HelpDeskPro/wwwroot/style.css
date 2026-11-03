@@ -276,7 +276,7 @@ button {
         margin: 0 0 9px;
     }
 
-/* Modern input fields */
+
     #ticketForm input,
     #ticketForm select,
     #ticketForm textarea {
@@ -298,3 +298,99 @@ button {
         #ticketForm textarea::placeholder {
             color: #94a3b8;
         }
+
+        #ticketForm input:focus,
+        #ticketForm select:focus,
+        #ticketForm textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+            background: #ffffff;
+        }
+
+  
+    #ticketForm .full-width {
+        grid-column: 1 / -1;
+    }
+
+  
+    #ticketForm textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+
+    #ticketForm .form-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 14px;
+    }
+
+        /* Shared button styling */
+        #ticketForm .form-actions button {
+            width: auto;
+            min-width: 125px;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+    /* Purple submit button */
+    #ticketForm button[type="submit"] {
+        background: #6366f1;
+        color: white;
+    }
+
+        #ticketForm button[type="submit"]:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+
+    /* Neutral cancel button */
+    #ticketForm .cancel-btn {
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+        #ticketForm .cancel-btn:hover {
+            background: #e2e8f0;
+        }
+
+/* ==========================================
+   RESPONSIVE MOBILE LAYOUT
+   ========================================== */
+
+@media (max-width: 650px) {
+
+    /* Reduce padding on smaller screens */
+    .ticket-form {
+        padding: 22px 18px;
+        margin: 20px auto;
+    }
+
+    /* Stack fields vertically */
+    #ticketForm {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+        /* Keep description full width */
+        #ticketForm .full-width {
+            grid-column: 1;
+        }
+
+        #ticketForm .form-actions {
+            grid-column: 1;
+            flex-direction: column-reverse;
+        }
+
+            #ticketForm .form-actions button {
+                width: 100%;
+            }
+}
