@@ -24,7 +24,7 @@ let tickets = savedTickets
 function saveTickets() {
 
     const ticketData = JSON.stringify(tickets);
-    localStorage.getItem("helpdeskTickets", ticketData);
+    localStorage.setItem("helpdeskTickets", ticketData);
 }
 
 //UPDATE DASHBOARD STATS
@@ -52,7 +52,7 @@ function updateStatistics() {
         total;
     document.getElementById("openTickets").textContent =
         open;
-    document.getElementById("progressTickets").textContent =
+    document.getElementById("inProgressTickets").textContent =
         inProgress;
     document.getElementById("resolvedTickets").textContent =
         resolved;
@@ -64,8 +64,8 @@ function displayTickets() {
     //remove previously displayed ticket cards
     ticketList.innerHTML = "";
 
-    //check whether the tcket array is empty
-    if (ticket.length === 0) {
+    //check whether the ticket array is empty
+    if (tickets.length === 0) {
         emptyMessage.hidden = false;
         updateStatistics();
         return;
@@ -95,7 +95,7 @@ function displayTickets() {
 
         //create a paragraph for category
         const category = document.createElement("p");
-        name.textContent = "Category: " + ticket.category;
+        category.textContent = "Category: " + ticket.category;
 
         //create a paragraph for description
         const description = document.createElement("p");
@@ -127,7 +127,7 @@ function displayTickets() {
         statusSelect.id = "status-" + ticket.id;
 
         //Connect the label to the dropdown 
-        statuslabel.htmlFor = statusSelect.id;
+        statusLabel.htmlFor = statusSelect.id;
 
         //Define the allowed ticket statuses
         const statuses = [
@@ -197,7 +197,7 @@ cancelTicketBtn.addEventListener("click", function () {
 });
 
 //SUBMIT A NEW SUPPORT TICKET
-ticketform.addEventListener("submit", function (event) {
+ticketForm.addEventListener("submit", function (event) {
 
     //Prevent the browser from refreshing
     event.preventDefault();
@@ -229,7 +229,7 @@ ticketform.addEventListener("submit", function (event) {
 
 
     //Create a JavaScript object containing the ticket
-    const netTicket = {
+    const newTicket = {
         id: ticketId,
         name: fullName,
         title: issueTitle,

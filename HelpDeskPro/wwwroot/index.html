@@ -28,29 +28,35 @@
 
         </section>
 
+
         <section class="stats">
 
+            <
             <div class="stat-card">
                 <h3>Total Tickets</h3>
                 <p id="totalTickets">0</p>
             </div>
 
+            
             <div class="stat-card">
                 <h3>Open Tickets</h3>
                 <p id="openTickets">0</p>
             </div>
 
+           
             <div class="stat-card">
                 <h3>In Progress</h3>
-                <p id="inProgressTickets">0</p>
+                <p id="progressTickets">0</p>
             </div>
 
+         
             <div class="stat-card">
                 <h3>Resolved</h3>
                 <p id="resolvedTickets">0</p>
             </div>
-    
+
         </section>
+
 
         <section class="tickets">
 
@@ -60,14 +66,14 @@
                     + Create Ticket
                 </button>
             </div>
-            
+
             <p id="emptyMessage">
                 No support tickets yet.
                 Create your first ticket to get started!
             </p>
 
             <div id="ticketList"></div>
-    
+
         </section>
 
         <section id="ticketFormSection"
@@ -75,7 +81,7 @@
 
             <h2> Create New Support Ticket </h2>
 
-            <form id="ticketForm" >
+            <form id="ticketForm">
                 <label for="fullName">Full Name</label>
                 <input type="text"
                        id="fullName"
@@ -108,7 +114,7 @@
 
                 <label for="description">Description</label>
                 <textarea id="description"
-                             rows="5"
+                          rows="5"
                           placeholder="Describe your problem..."
                           required></textarea>
 
@@ -123,7 +129,7 @@
                             id="cancelTicketBtn"
                             class="cancel-btn">
                         Cancel
-                     </button>
+                    </button>
                 </div>
             </form>
         </section>
